@@ -17,7 +17,6 @@
 
 .sign-up-link:hover {
    text-decoration: underline;
-   margin-bottom: 10px;
 }
 
 body {
@@ -51,7 +50,7 @@ video {
 .login-container{
    position: absolute;
    width: 400px;
-   height: 510px;
+   height: 530px;
    background: #00000044;
    padding: 30px;
    border-radius: 25px;
@@ -126,4 +125,10 @@ video {
 
 .btn:hover {
    transform: scale(1.1);
+}
+
+/* password incorrect need to linked with js scripts*/
+
+.user-infoBox .erorrpassword {
+   color: red;
 }
