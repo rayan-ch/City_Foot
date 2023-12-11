@@ -1,0 +1,133 @@
+@font-face {
+   font-family: Poppins;
+   src: url(/fonts);
+ }
+
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   text-decoration: none;
+   color: #fff;
+}
+
+.sign-up-link {
+   color: #a9ed89;
+}
+
+.sign-up-link:hover {
+   text-decoration: underline;
+}
+
+body {
+   font-family: Poppins;
+}
+
+.showcase {
+   position: relative;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   padding: 0 20px;
+}
+
+video {
+   width: 100%;
+}
+
+.video-container {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   overflow: hidden;
+}
+
+.login-container {
+   position: absolute;
+   width: 420px;
+   height: 580px;
+   background: #00000044;
+   padding: 20px;
+   border-radius: 25px;
+   backdrop-filter: blur(2px);
+}
+
+.Sign-in-txt{
+   color: aliceblue;
+   margin: 0 0 10px 0;
+}
+
+.user-info {
+   width: 100%;
+   height: 40px;
+   padding: 15px;
+   background-color: #ffffff44;
+   backdrop-filter: blur(5px);
+   border: none;
+   border-radius: 3px;
+}
+
+.user-info::placeholder {
+   color: #ffffffae;
+}
+
+.login-container p {
+   text-align: left;
+   color: #fff;
+   font-weight: 300;
+   margin: 0 0 5px 0;
+}
+
+.user-infoBox {
+   margin-top: 20px;
+}
+
+.forget-sign {
+   display: flex;
+   justify-content: space-between;
+   margin-top: 0px;
+}
+
+.login-btn {
+   display: block;
+   width: 100%;
+   color: black;
+   padding: 10px;
+   border: none;
+   background: #fff;
+   font-weight: 600;
+   font-family: Poppins;
+   margin-top: 5px;
+   font-size: 16px;
+   transition: .3s ease;
+   border-radius: 5px;
+}
+
+.other-ways {
+   display: block;width: 100%;
+   color: white;
+   margin-top: 10px;
+   padding: 10px;
+   border: none;
+   background: #ffffff50;
+   backdrop-filter: blur(20px);
+   font-weight: 600;
+   font-family: Poppins;
+   border-radius: 5px;
+   font-size: 16px;
+   transition: .3s ease;
+}
+
+.login-btn:hover {
+   cursor: pointer;
+   opacity: 0.8;
+}
+
+.btn:hover {
+   transform: scale(1.05);
+}

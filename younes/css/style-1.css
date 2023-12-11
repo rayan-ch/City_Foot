@@ -84,6 +84,10 @@ video {
    margin-top: 20px;
 }
 
+.user-info::placeholder {
+   color: #ffffffba;
+}
+
 .forget-sign {
    display: flex;
    justify-content: space-between;
