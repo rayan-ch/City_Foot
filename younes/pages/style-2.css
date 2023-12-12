@@ -52,7 +52,7 @@ video {
 .login-container {
    position: absolute;
    width: 420px;
-   height: 580px;
+   height: max-content;
    background: #00000044;
    padding: 20px;
    border-radius: 25px;
