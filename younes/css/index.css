@@ -1,6 +1,6 @@
 @font-face {
    font-family: Poppins;
-   src: url(/younes/fonts);
+   src: url(younes/fonts);
  }
 
 *{
@@ -76,7 +76,7 @@ header {
 
 .home-section {
    position: absolute;
-   background: url(/younes/assets/city_foot_red1366.png);
+   background: url(../assets/city_foot_red1366.png);
    width: 100%;
    min-height: 100vh;
    background-size: cover;
