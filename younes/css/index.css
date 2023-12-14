@@ -41,11 +41,11 @@ header {
 }
 
 .nav-links a:hover {
-   border-bottom: 1px solid rgb(255, 0, 0);
+  border-bottom: 1px solid rgb(255, 0, 0);
 }
 
 .nav-bar a.active {
-   border-bottom: 3px solid rgb(39, 39, 39);
+  border-bottom: 3px solid rgb(39, 39, 39);
 }
 
 .nav-bar .btn:hover {
@@ -78,7 +78,7 @@ header {
    position: absolute;
    background: url(../assets/city_foot_red1366.png);
    width: 100%;
-   min-height: 100vh;
+   min-height: 110vh;
    background-size: cover;
    z-index: -1;
 }
@@ -172,3 +172,4 @@ header {
      );
    }
  }
+

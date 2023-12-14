@@ -111,7 +111,8 @@ video {
 }
 
 .other-ways {
-   display: block;width: 100%;
+   display: block;
+   width: 100%;
    color: white;
    margin-top: 10px;
    padding: 10px;
@@ -123,6 +124,14 @@ video {
    border-radius: 5px;
    font-size: 16px;
    transition: .3s ease;
+}
+
+.facebook {
+   background-color: #0000ff;
+}
+
+.google {
+   background-color: rgb(209, 72, 72);
 }
 
 .btn:hover {

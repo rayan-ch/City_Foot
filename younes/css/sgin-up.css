@@ -125,6 +125,14 @@ video {
    transition: .3s ease;
 }
 
+.facebook {
+   background-color: #0000ff;
+}
+
+.google {
+   background-color: rgb(209, 72, 72);
+}
+
 .login-btn:hover {
    cursor: pointer;
    opacity: 0.8;
