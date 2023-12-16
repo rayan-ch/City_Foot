@@ -93,6 +93,7 @@ video {
 
 .footer-sign {
    display: flex;
+   font-size: 13px;
    justify-content: space-between;
    margin-top: 10px;
 }

@@ -9,6 +9,7 @@ export const Auth = ({page, isAuthenticated, setAuthenticated}) => {
         if (isAuthenticated === true) {
             navigate("/dashboard");
         }
+        // eslint-disable-next-line
     }, []);
     return (
         <div className="showcase">

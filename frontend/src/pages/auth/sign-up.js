@@ -3,11 +3,12 @@ import { Button, A, P } from "../../components/base"
 import { useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
-
+import ReCAPTCHA from "react-google-recaptcha";
 
 export const SignUp = () => {
-    const [auths, setAuths] = useState({})
+    const [auths, setAuths] = useState({"username":"", "email":"", "password":"", "re-password":""})
     const [errors, setErrors] = useState({})
+    const [capVal, setCapVal] = useState();
     const navigate = useNavigate();
     const onChange = (e) => {
         setAuths({...auths, [e.target.name]:e.target.value})
@@ -40,12 +41,17 @@ export const SignUp = () => {
             }
         }
         if (target === "re-password") {
-            if (auths["password"] !== value || value.length < 8) {
-                setErrors({...errors, [target]:"Mot de passe non identique"})
-                error_elm.style.display = "block"
-                info_box.style.borderBottom = '3px solid red'
+            if (auths["password"].length >= 8) {
+                if (auths["password"] !== value || value.length < 8) {
+                    setErrors({...errors, [target]:"Mot de passe non identique"})
+                    error_elm.style.display = "block"
+                    info_box.style.borderBottom = '3px solid red'
+                } else {
+                    info_box.style.borderBottom = '3px solid green'
+                    removeError(target)
+                }
             } else {
-                info_box.style.borderBottom = '3px solid green'
+                info_box.style.borderBottom = 'none'
                 removeError(target)
             }
         }
@@ -98,14 +104,22 @@ export const SignUp = () => {
     function onSubmit(e) {
         e.preventDefault()
         console.log(Object.keys(errors).length)
-        if (Object.keys(errors).length === 0) {
-            axios.post("http://localhost:5000/sign-up", auths)
-            .then(res => {
-                if (res.data["error"] === 0) {
-                    navigate("/sign-in");
-                }
-            })
-            .catch(err => console.log(err))
+        console.log(capVal)
+        if (capVal !== undefined && capVal !== null) {
+            removeError("captcha")
+            if (Object.keys(errors).length === 0) {
+                axios.post("http://localhost:5000/sign-up", auths)
+                .then(res => {
+                    if (res.data["error"] === 0) {
+                        navigate("/sign-in")
+                        setCapVal();
+                    }
+                })
+                .catch(err => console.log(err))
+            }
+        } else {
+            let target = "captcha"
+            setErrors({...errors, [target]:"Captcha invalide"})
         }
     }
     return (
@@ -121,7 +135,15 @@ export const SignUp = () => {
                     <P Id={"error password"} text={errors["password"]} />
                     <InfoBox Text={"Confirm Password"} Class={"user-info re-password"} onChange={onChange} Type={"password"} Name={"re-password"} />
                     <P Id={"error re-password"} text={errors["re-password"]} />
-                    <div className="footer-sign" style={{ fontSize: '13px' }}>
+
+                    <div className="user-infoBox">
+                        <ReCAPTCHA
+                            sitekey="6Ld0rzMpAAAAAKtLkin6Qeg2r0tdw3LIsPJIP6Hn"
+                            onChange={(val) => setCapVal(val)}
+                        />
+                        <P Id={"error captcha"} text={errors["captcha"]} />
+                    </div>
+                    <div className="footer-sign">
                         <p>Already in city foot ?, <A Class={"sign-link"} Link={"sign-in"} text={" Sign-in"}/> </p>
                     </div>
                     <Button Class={"login-btn btn"} text={"Create"} />
