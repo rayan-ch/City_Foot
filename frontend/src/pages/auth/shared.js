@@ -1,8 +1,15 @@
 
 import Video from "../../styles/assets/green-blue-background.mp4"
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-
-export const Auth = ({page}) => {
+export const Auth = ({page, isAuthenticated, setAuthenticated}) => {
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (isAuthenticated === true) {
+            navigate("/dashboard");
+        }
+    }, []);
     return (
         <div className="showcase">
             <div className="video-container">

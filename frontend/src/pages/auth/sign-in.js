@@ -2,25 +2,26 @@ import { InfoBox } from "../../components/infoBox"
 import { Button, A, P } from "../../components/base"
 import { useState } from "react"
 import axios from "axios"
-import { redirect } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 export const SignIn = ({isAuthenticated, setAuthenticated}) => {
     const [auths, setAuths] = useState({})
     const [error, setError] = useState("")
     const onChange = (e) => setAuths({...auths, [e.target.name]:e.target.value})
+    const navigate = useNavigate();
 
     function onSubmit(e) {
         e.preventDefault()
         axios.post("http://localhost:5000/login", auths)
         .then(res => {
-            if (res.data["error"] === 1) {
+            if (res.data["error"] === 0) {
+                setAuthenticated(true)
+                navigate("/dashboard");
+            } else {
                 console.log(res.data["msg"])
                 let error_elm = document.getElementById("error")
                 error_elm.style.display = "block"
                 setError(res.data["msg"])
-            } else {
-                redirect("/home")
-                setAuthenticated(true)
             }
         })
         .catch(err => console.log(err))
