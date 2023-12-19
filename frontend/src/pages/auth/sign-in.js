@@ -4,11 +4,13 @@ import { useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useLangContext } from "../../Lang";
 
 export const SignIn = ({isAuthenticated, setAuthenticated}) => {
     const [auths, setAuths] = useState({})
     const [error, setError] = useState("")
     const [capVal, setCapVal] = useState();
+    const lang = useLangContext()
 
     const onChange = (e) => setAuths({...auths, [e.target.name]:e.target.value})
     const navigate = useNavigate();
@@ -25,24 +27,23 @@ export const SignIn = ({isAuthenticated, setAuthenticated}) => {
                     setAuthenticated(true)
                     navigate("/dashboard");
                 } else {
-                    console.log(res.data["msg"])
                     error_elm.style.display = "block"
-                    setError(res.data["msg"])
+                    setError(lang[res.data["msg"]])
                 }
             })
             .catch(err => console.log(err))
         } else {
             error_elm.style.display = "block"
-            setError("Captcha invalide")
+            setError(lang["CAPTCHA_INVALID"])
         }
     }
     return (
         <>
-            <h2 className="Sign-txt">SIGN IN</h2>
+            <h2 className="Sign-txt">{lang["LOGIN_TITLE"]}</h2>
             <form onSubmit={onSubmit}>
                 <label htmlFor="sign-in">
-                    <InfoBox Text={"Username"} Class={"user-info"} onChange={onChange} Type={"text"} Name={"username"} />
-                    <InfoBox Text={"Password"} Class={"user-info"} onChange={onChange} Type={"password"} Name={"password"} />
+                    <InfoBox Text={lang["USERNAME"]} Class={"user-info"} onChange={onChange} Type={"text"} Name={"username"} />
+                    <InfoBox Text={lang["PASSWORD"]} Class={"user-info"} onChange={onChange} Type={"password"} Name={"password"} />
                     <div className="user-infoBox">
                         <ReCAPTCHA
                             sitekey="6Ld0rzMpAAAAAKtLkin6Qeg2r0tdw3LIsPJIP6Hn"
@@ -52,13 +53,11 @@ export const SignIn = ({isAuthenticated, setAuthenticated}) => {
                     </div>
                     <P Id={"error"} text={error} />
                     <div className="footer-sign">
-                        <A Class={"forget"} Link={"Forget-link"} text={"Forget password ?"}/>
-                        <A Class={"sign-link"} Link={"sign-up"} text={"Sign-up"}/>
+                        <A Class={"forget"} Link={"Forget-link"} text={lang["FORFOT_PASSWORD"]}/>
+                        <A Class={"sign-link"} Link={"sign-up"} text={lang["SIGN_UP_IN_LOGIN_PAGE"]}/>
                     </div>
 
-                    <Button Class={"login-btn btn"} text={"Login"} />
-                    <A Class={"other-ways btn"} Link={"#google"} icone={"bx bxl-google"} text={"Google"} />
-                    <A Class={"other-ways btn"} Link={"#facebook"} icone={"bx bxl-facebook-circle"} text={"Facebook"} />
+                    <Button Class={"login-btn btn"} text={lang["LOGIN_BTN"]} />
                 </label>
             </form>
         </>

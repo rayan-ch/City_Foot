@@ -19,15 +19,19 @@ app.use(cors({
 
 function checkValidity(username, email) {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT id FROM users WHERE username = ? OR email = ?`, [username, email], (err, results) => {
-            if (err) {
-                reject({"error": -1, "msg": "Contact site administrator for more informations"});
-            } else if (results.length === 0) {
-                resolve({"error": 0, "msg": "disponible"});
-            } else {
-                resolve({"error": 1, "msg": "existe déjà"});
-            }
-        });
+        if (((username || email) === "") || ((username || email) == null) || username.includes(" ")) {
+            reject({"error": -1, "msg": "EMAIL_USERNAME_INVALID"});
+        } else {
+            db.query(`SELECT id FROM users WHERE username = ? OR email = ?`, [username, email], (err, results) => {
+                if (err) {
+                    reject({"error": -1, "msg": "CONTACT_ADMIN_FOR_INFO"});
+                } else if (results.length === 0) {
+                    resolve({"error": 0, "msg": "AVAILABLE"});
+                } else {
+                    resolve({"error": 1, "msg": "ALREADY_EXIST"});
+                }
+            });
+        }
     });
 }
 
@@ -35,13 +39,13 @@ app.post("/login", (req, res) => {
     let data = req.body
     db.query("SELECT * FROM users WHERE username = ? && password = ?", [data.username, data.password], (err, results) => {
         if(err) {
-            res.send({"error":-1, "msg":"Contact site administrator for more informations"})
+            res.send({"error":-1, "msg":"CONTACT_ADMIN_FOR_INFO"})
             console.log(err)
         }
         if(results.length > 0) {
             res.send({"error":0, "msg":results})
         } else {
-            res.send({"error":1, "msg":"Username or password incorrect"})
+            res.send({"error":1, "msg":"USERNAME_PASSWORD_INCORRECT"})
         }
     })
 })
@@ -53,12 +57,12 @@ app.post("/sign-up", (req, res) => {
         if (result["error"] === 0) {
             db.query("INSERT INTO users (username, email, password) VALUES (?, ?, ?)", [data.username, data.email, data.password], (err, results) => {
                 if(err) {
-                    res.send({"error":-1, "msg":"Contact site administrator for more informations"})
+                    res.send({"error":-1, "msg":"CONTACT_ADMIN_FOR_INFO"})
                 }
-                res.send({"error":0, "msg":"account created"})
+                res.send({"error":0, "msg":"ACCOUNT_CREATED"})
             })
         } else {
-            res.send({"error":1, "msg":"account not created"})
+            res.send({"error":1, "msg":result["msg"]})
         }
     })
     .catch(error => console.error(error));
@@ -68,13 +72,13 @@ app.post("/checkValidity", (req, res) => {
     let data = req.body
     db.query(`SELECT id FROM users WHERE ${data.name} = ?`, [data.value], (err, results) => {
         if(err) {
-            res.send({"error":-1, "msg":"Contact site administrator for more informations"})
+            res.send({"error":-1, "msg":"CONTACT_ADMIN_FOR_INFO"})
             console.log(err)
         }
         if(results.length == 0) {
-            res.send({"error":0, "msg":"disponible"})
+            res.send({"error":0, "msg":"AVAILABLE"})
         } else{
-            res.send({"error":1, "msg":"existe déja"})
+            res.send({"error":1, "msg":"ALREADY_EXIST"})
         }
     })
 })

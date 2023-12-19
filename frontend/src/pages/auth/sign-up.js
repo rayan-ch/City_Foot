@@ -4,11 +4,14 @@ import { useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useLangContext } from "../../Lang";
 
 export const SignUp = () => {
     const [auths, setAuths] = useState({"username":"", "email":"", "password":"", "re-password":""})
     const [errors, setErrors] = useState({})
     const [capVal, setCapVal] = useState();
+    const lang = useLangContext()
+
     const navigate = useNavigate();
     const onChange = (e) => {
         setAuths({...auths, [e.target.name]:e.target.value})
@@ -31,7 +34,7 @@ export const SignUp = () => {
 
         if (target === "password") {
             if (value.length < 8) {
-                setErrors({...errors, [target]:"Mot de passe trop court"})
+                setErrors({...errors, [target]:lang["PASSWORD_TOO_SHORT"]})
                 error_elm.style.display = "block"
                 info_box.style.borderBottom = '3px solid red'
             } else {
@@ -43,7 +46,7 @@ export const SignUp = () => {
         if (target === "re-password") {
             if (auths["password"].length >= 8) {
                 if (auths["password"] !== value || value.length < 8) {
-                    setErrors({...errors, [target]:"Mot de passe non identique"})
+                    setErrors({...errors, [target]:lang["NOT_SAME_PASSWORD"]})
                     error_elm.style.display = "block"
                     info_box.style.borderBottom = '3px solid red'
                 } else {
@@ -71,7 +74,7 @@ export const SignUp = () => {
                 info_box.style.borderBottom = '3px solid green'
                 removeError(name)
             } else {
-                setErrors({...errors, [name]:"Cet email existe déja"})
+                setErrors({...errors, [name]:lang["EMAIL_ALREADY_EXIST"]})
                 info_box.style.borderBottom = '3px solid red'
                 error_elm.style.display = "block"
             }
@@ -90,13 +93,13 @@ export const SignUp = () => {
                 if (res.data["error"] === 0) {
                     info_box.style.borderBottom = '3px solid green'
                 } else {
-                    setErrors({...errors, [name]:"Username existe déja"})
+                    setErrors({...errors, [name]:lang["USERNAME_ALREADY_EXIST"]})
                     info_box.style.borderBottom = '3px solid red'
                     error_elm.style.display = "block"
                 }
             })
         } else {
-            setErrors({...errors, [name]:"3 caractères minimum"})
+            setErrors({...errors, [name]:lang["USENAME_TOO_SHORT"]})
             info_box.style.borderBottom = '3px solid red'
             error_elm.style.display = "block"
         }
@@ -113,27 +116,30 @@ export const SignUp = () => {
                     if (res.data["error"] === 0) {
                         navigate("/sign-in")
                         setCapVal();
+                    } else {
+                        let target = "global"
+                        setErrors({...errors, [target]:lang[res.data["msg"]]})
                     }
                 })
                 .catch(err => console.log(err))
             }
         } else {
             let target = "captcha"
-            setErrors({...errors, [target]:"Captcha invalide"})
+            setErrors({...errors, [target]:lang["CAPTCHA_INVALID"]})
         }
     }
     return (
         <>
-            <h2 className="Sign-txt">SIGN UP</h2>
+            <h2 className="Sign-txt">{lang["SIGN_UP_TITLE"]}</h2>
             <form onSubmit={onSubmit}>
                 <label htmlFor="sign-up">
-                    <InfoBox Text={"Username"} Class={"user-info username"} onChange={onChange} Type={"text"} Name={"username"}/>
+                    <InfoBox Text={lang["USERNAME"]} Class={"user-info username"} onChange={onChange} Type={"text"} Name={"username"}/>
                     <P Id={"error username"} text={errors["username"]} />
-                    <InfoBox Text={"Email"} Class={"user-info email"} onChange={onChange} Type={"email"} Name={"email"} />
+                    <InfoBox Text={lang["EMAIL"]} Class={"user-info email"} onChange={onChange} Type={"email"} Name={"email"} />
                     <P Id={"error email"} text={errors["email"]} />
-                    <InfoBox Text={"Password"} Class={"user-info password"} onChange={onChange} Type={"password"} Name={"password"} />
+                    <InfoBox Text={lang["PASSWORD"]} Class={"user-info password"} onChange={onChange} Type={"password"} Name={"password"} />
                     <P Id={"error password"} text={errors["password"]} />
-                    <InfoBox Text={"Confirm Password"} Class={"user-info re-password"} onChange={onChange} Type={"password"} Name={"re-password"} />
+                    <InfoBox Text={lang["CONFIRM_PASSWORD"]} Class={"user-info re-password"} onChange={onChange} Type={"password"} Name={"re-password"} />
                     <P Id={"error re-password"} text={errors["re-password"]} />
 
                     <div className="user-infoBox">
@@ -143,12 +149,11 @@ export const SignUp = () => {
                         />
                         <P Id={"error captcha"} text={errors["captcha"]} />
                     </div>
+                    <P Id={"error global"} text={errors["global"]} />
                     <div className="footer-sign">
-                        <p>Already in city foot ?, <A Class={"sign-link"} Link={"sign-in"} text={" Sign-in"}/> </p>
+                        <p>{lang["ALREADY_HAVE_ACCOUNT"]}, <A Class={"sign-link"} Link={"sign-in"} text={lang["SIGN_IN_IN_SIGNUP_PAGE"]}/> </p>
                     </div>
-                    <Button Class={"login-btn btn"} text={"Create"} />
-                    <A Class={"other-ways btn"} Link={"#google"} icone={"bx bxl-google"} text={"Google"} />
-                    <A Class={"other-ways btn"} Link={"#facebook"} icone={"bx bxl-facebook-circle"} text={"Facebook"} />
+                    <Button Class={"login-btn btn"} text={lang["CREATE_ACCOUNT_BTN"]} />
                 </label>
             </form>
         </>
