@@ -12,6 +12,212 @@
 }
 
 body {
-   background: url();
+   width: 100%;
+   height: 100%;
+   background: url(../assets/Bg-reserve.jpg), no-repeat;
+   backdrop-filter: blur(30px);
+   background-size: cover;
    font-family: Poppins;
+   z-index: -100;
 }
+
+.container {
+   display: flex;
+}
+
+.sidebar {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   min-height: 100%;
+   width: 35vh;
+   background: #00000077;
+   border-right: 1px solid #ffffff2c;
+   padding: 0px;
+   text-align: left;
+}
+
+hr {
+   opacity: 0.1;
+   height: 1px;
+   width: 90%;
+   margin: 0 auto;
+   border-color: red;
+   border-radius: 50%;
+}
+
+.user-info {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+}
+
+.user-inf h5 {
+   font-size: 10px;
+}
+
+.user-inf h6 {
+   font-size: 10px;
+}
+
+.user-pic img{
+   width: 100px;
+}
+
+.logo img {
+   width: 200px;
+}
+
+.options {
+   display: flex;
+   flex-direction: column;
+   padding: 10px;
+}
+
+.options a {
+   margin-top: 5px;
+   margin-bottom: 5px;
+   padding: 15px;
+   border-bottom: 2px solid rgba(255, 0, 0, 0.15);
+   background-color: rgba(0, 0, 0, 0.395);
+   border-radius: 10px;
+   transition: 0.3s ease all;
+}
+
+.options .active {
+   background: rgba(255, 0, 0, 0.55);
+}
+
+.options a:hover {
+   background-color: rgba(255, 0, 0, 0.3);
+}
+
+
+ /* calendar css code here */
+
+ .calendar {
+   width: 45rem;
+   height: 52rem;
+   background-color: #2222273c;
+   box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.4);
+ }
+ 
+ .month {
+   width: 100%;
+   height: 12rem;
+   background-color: #00000020;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 0 2rem;
+   text-align: center;
+   text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+ }
+ 
+ .month i {
+   font-size: 2.5rem;
+   cursor: pointer;
+ }
+ 
+ .month h1 {
+   font-size: 3rem;
+   font-weight: 400;
+   text-transform: uppercase;
+   letter-spacing: 0.2rem;
+   margin-bottom: 1rem;
+ }
+ 
+ .month p {
+   font-size: 1.6rem;
+ }
+ 
+ .weekdays {
+   width: 100%;
+   height: 5rem;
+   padding: 0 0.4rem;
+   display: flex;
+   align-items: center;
+ }
+ 
+ .weekdays div {
+   font-size: 1.5rem;
+   font-weight: 400;
+   letter-spacing: 0.1rem;
+   width: calc(44.2rem / 7);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+ }
+ 
+ .days {
+   width: 100%;
+   display: flex;
+   flex-wrap: wrap;
+   padding: 0.2rem;
+ }
+ 
+ .days div {
+   font-size: 1.4rem;
+   margin: 0.3rem;
+   width: calc(40.2rem / 7);
+   height: 5rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+   transition: background-color 0.2s;
+ }
+ 
+ .days div:hover:not(.today) {
+   background-color: #ef26261c;
+   border: none;
+   cursor: pointer;
+ }
+ 
+ .prev-date,
+ .next-date {
+   opacity: 0.5;
+ }
+ 
+ .today {
+   background-color: #ff00005d;
+ }
+
+ .container .extra-right {
+   width: 100vh;
+   min-height: 100vh;
+   background: #141414ad;
+   z-index: 999;
+   text-align: center;
+   margin-top: 0px;
+ }
+
+ .extra-right h2 {
+   margin-top: 30px;
+ }
+
+ .extra-right h4 {
+   margin-top: 30px;
+   background-color: rgba(0, 0, 0, 0.652);
+   padding: 15px;
+   border-radius: 10px;
+   margin: 30px;
+ }
+
+ .extra-right button{
+   margin-top: 300px;
+   padding: 15px 40px;
+   border-radius: 5px;
+   border: none;
+   font-size: 16px;
+   font-weight: 500;
+   background: linear-gradient(180deg, #ff0000, #7c1010);
+   transition: 0.3s all ease;
+ }
+
+ .extra-right button:hover{
+   transform: scale(1.1);
+ }
