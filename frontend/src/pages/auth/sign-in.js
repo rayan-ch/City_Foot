@@ -1,5 +1,5 @@
 import { InfoBox } from "../../components/infoBox"
-import { Button, A, P } from "../../components/base"
+import { Button, A, P, Input } from "../../components/base"
 import { useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
@@ -37,13 +37,25 @@ export const SignIn = ({isAuthenticated, setAuthenticated}) => {
             setError(lang["CAPTCHA_INVALID"])
         }
     }
+    function onClickPassword() {
+        let pass_toggle = document.getElementById("password")
+        if (pass_toggle.type == "password") {
+            pass_toggle.type = "text"
+        } else {
+            pass_toggle.type = "password"
+        }
+    }
     return (
         <>
             <h2 className="Sign-txt">{lang["LOGIN_TITLE"]}</h2>
             <form onSubmit={onSubmit}>
                 <label htmlFor="sign-in">
                     <InfoBox Text={lang["USERNAME"]} Class={"user-info"} onChange={onChange} Type={"text"} Name={"username"} />
-                    <InfoBox Text={lang["PASSWORD"]} Class={"user-info"} onChange={onChange} Type={"password"} Name={"password"} />
+                    <div className="user-infoBox">
+                        <P text={lang["PASSWORD"]} />
+                        <Input Class={"user-info"} PlaceHolder={lang["PASSWORD"]} Type={"password"} Name={"password"} onChange={onChange} Id={"password"} />
+                        <span id="show-password-toggle" onClick={onClickPassword}><i className="fas fa-eye"></i>s</span>
+                    </div> 
                     <div className="user-infoBox">
                         <ReCAPTCHA
                             sitekey="6Ld0rzMpAAAAAKtLkin6Qeg2r0tdw3LIsPJIP6Hn"

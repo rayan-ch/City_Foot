@@ -1,9 +1,9 @@
 @font-face {
    font-family: 'Poppins';
    src: url('../fonts/Poppins-Regular.ttf') format('truetype');
- }
+}
 
-*{
+* {
    margin: 0;
    padding: 0;
    box-sizing: border-box;
@@ -42,6 +42,7 @@ video {
    min-height: 100%;
    object-fit: cover;
 }
+
 .video-container {
    position: absolute;
    top: 0;
@@ -61,7 +62,7 @@ video {
    backdrop-filter: blur(2px);
 }
 
-.Sign-in-txt{
+.Sign-in-txt {
    color: aliceblue;
    margin: 0 0 10px 0;
 }
@@ -158,4 +159,18 @@ video {
    font-family: Poppins;
    color: red;
    display: none;
+}
+
+/* Style pour l'icône du mot de passe */
+#show-password-toggle {
+   cursor: pointer; /* Change le curseur en pointeur au survol */
+   position: absolute; /* Position absolue pour placer l'icône à côté de l'input */
+   top: 50%; /* Aligne l'icône verticalement au centre */
+   right: 10px; /* Aligne l'icône à 10px du bord droit */
+   transform: translateY(-50%); /* Ajuste la position verticale */
+}
+
+/* Style pour l'icône du mot de passe au survol */
+#show-password-toggle:hover {
+   color: blue; /* Change la couleur de l'icône au survol */
 }
